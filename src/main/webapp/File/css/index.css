@@ -1,0 +1,76 @@
+dd, dt{
+    float: left;
+}
+table tr{
+    border: 1px solid black;
+}
+.hideTr{
+    display: none;
+}
+.showTr{
+    display: "";
+}
+
+
+#nav{
+    background-color: black;
+    height: 50px;
+    width: 100%;
+    margin-bottom: 20px;
+}
+
+#nav ul
+{
+    list-style:none; /* 去掉ul前面的符号 */
+    margin: 0px; /* 与外界元素的距离为0 */
+    padding: 0px; /* 与内部元素的距离为0 */
+    width: auto; /* 宽度根据元素内容调整 */
+}
+/* 所有class为menu的div中的ul中的li样式 */
+#nav ul li[class="menu"]
+{
+    float:left; /* 向左漂移，将竖排变为横排 */
+}
+/* 所有class为menu的div中的ul中的a样式(包括尚未点击的和点击过的样式) */
+
+#nav ul li a, #nav ul li a:visited
+{
+    /* background-color: #555555;  */
+    height: 50px;
+    color: #ffffff; /* 文字颜色 */
+    display: block; /* 此元素将显示为块级元素，此元素前后会带有换行符 */
+    padding: 20px 20px 20px 20px; /* 内部填充的距离 */
+    text-decoration: none; /* 不显示超链接下划线 */
+    white-space: nowrap; /* 对于文本内的空白处，不会换行，文本会在在同一行上继续，直到遇到 <br> 标签为止。 */
+}
+/* 所有class为menu的div中的ul中的a样式(鼠标移动到元素中的样式) */
+#nav ul li a:hover
+{
+    background-color: #ffffff; /* 背景色 */
+    color: #000000; /* 文字颜色 */
+    text-decoration: none; /* 不显示超链接下划线 */
+    cursor: pointer;
+}
+#home{
+    background-color: green;
+}
+#user{
+    background-color: green;
+    /* clear: right; */
+    float: right;
+    padding-right: 50px;
+}
+/* 所有class为menu的div中的ul中的a样式(鼠标点击元素时的样式) */
+#nav ul li a:active
+{
+    background-color: #ffffff; /* 背景色 */
+    color: #000000; /* 文字颜色 */
+    text-decoration: none; /* 不显示超链接下划线 */
+}
+
+.hidediv{
+    display: none;
+}
+.showdiv{
+    display: "";
+}

@@ -1,0 +1,100 @@
+/************************************nav********************************************/
+header{
+	height: 100px;
+	width: 100%;
+	border-bottom: 1px solid #D6D6D6;
+}
+
+.inne_c1{
+	margin-left: 5%;
+	width: 90%;
+	height: 100px;
+}
+
+#logo{
+	width: 20%;
+	height: 100px;
+	line-height: 100px;
+	float: left;
+}
+
+#logo img{
+	margin-top: 25px;
+}
+
+#nav{
+	width: 70%;
+	height: 100px;
+	float: left;
+}
+
+#nav ul{
+	width: 70%;
+	height: 100px;
+	text-align: center;
+	margin-top: 0px;
+	margin-left: 15%;
+}
+
+#nav li{
+	width: 17.5%;
+	line-height: 100px;
+	margin-left: 10px;
+	float: left;
+	list-style: none;
+}
+#nav li a{
+	text-decoration: none;
+}
+
+#login{
+	height: 100px;
+	width: 10%;
+	float: left;
+	line-height: 100px;
+}
+
+#login img{
+	margin-top: 35px;
+	margin-right: 5px;
+}
+
+#one{
+	color: #000000;
+	font-size: 14px;
+}
+
+#two{
+	color: #000000;
+	font-size: 14px;
+}
+
+#three{
+	color: #000000;
+	font-size: 14px;
+}
+
+#four{
+	color: #000000;
+	font-size: 14px;
+}
+
+#dropdownMenu1{
+	border: none;
+	height: 30px;
+	background: #FFFFFF;
+}
+
+.dropdown-menu li a{
+	height: 30px;
+}
+
+.dropdown-menu li a img{
+	position: relative;
+	float: left;
+	top: -34px;
+}
+
+.dropdown-menu li a p{
+	float: left;
+}

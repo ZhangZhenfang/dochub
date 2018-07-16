@@ -1,0 +1,222 @@
+<!DOCTYPE html>
+<html>
+	<head>
+		<meta charset="UTF-8">
+		<title>个人中心</title>
+		<link rel="stylesheet" type="text/css" href="css/personalCenter.css"/>
+		<link rel="stylesheet" type="text/css" href="css/header.css"/>
+		<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/bootstrap.min.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/header.js" type="text/javascript" charset="utf-8"></script>
+		<script src="js/personalCenter.js" type="text/javascript" charset="utf-8"></script>
+	</head>
+	<body>
+		<header>
+			<div class="inne_c1">
+				<div id="logo">
+					<img src="img/house.png" style="float: left;"/><p style="float: left;">SuperCommissary</p>
+				</div>
+				<div id="nav">
+					<ul>
+						<li><a href="upfile.html" id="one">上传文件</a></li>
+						<li><a href="notice.html" id="two">我的公告</a></li>
+						<li><a href="uptable.html" id="three">我的表格</a></li>
+						<li><a href="mytable.html" id="four">填写表格</a></li>
+					</ul>
+				</div>
+				<div id="login">
+					<img src="img/login.png" style="float: left;"/><p style="float: left;">个人中心</p>
+				</div>
+			</div>
+		</header>
+		<div class="content_top"></div>
+		<div class="content">
+		<div class="inne_c3">
+			<div class="content_bottom">
+				<div class="down_left">
+					<div class="new_person" class="person" id="btn1"><img class="img" id="img1" src="img/add.png"/><span class="span">添加关注</span> </div>
+					<div class="person" class="new_person" id="btn2"><img class="img" id="img2" src="img/info1.png"/><span class="span">修改信息</span></div>
+					<div class="person" class="new_person" id="btn3"><img class="img" id="img3" src="img/pwd1.png"/><span class="span">修改密码</span></div>
+					<div class="person" class="new_person" id="btn4"><img id="img4" class="img" src="img/cancel.png"/><span class="span" onclick='logout()'>退出登录</span></div>
+				</div>
+				<div class="down_right" class="new_right" id="btn5">
+					<div class="top">
+						<p class="p_left">添加关注</p>
+					</div>
+					<div class="bottom">
+						<div class="bottom_left">
+							<div class="bottom_left_down">
+								<input type="text" name="attention" id="attention" value="" placeholder="请输入对方账号" /><br />
+								<input type="submit" name="submit" id="submit" value="关注" />
+								<input type="reset" na b me="reset" id="reset" value="重置" />
+							</div>
+						</div>
+						<div class="bottom_right">
+							<table class="table_result" id="table_result">
+								<tr>
+									<th></th>
+									<th></th>
+									<th></th>
+									<th colspan="">我的关注</th>
+								</tr>
+								<tr class="result_title">
+									<td>学号</td>
+									<td>姓名</td>
+									<td>性别</td>
+									<td>学院</td>
+									<td>专业</td>
+									<td>操作</td>
+								</tr>
+							</table>
+						</div>
+					</div>
+				</div>
+			
+				<div class="new_right" class="down_right2" id="btn6">
+					<div class="top">
+						<p class="p_left">修改信息</p>
+					</div>
+					<div class="right_buttom">
+						<div class="right2_middle">
+							<div id="ringt2_left">
+								<ul>
+									<li>
+										<lable>姓名</lable><input class="intput1" type="text" name="name" id="name" value="李敏" />
+									</li>
+									<li>
+										<lable>学院</lable><input class="intput1" type="text" name="college" id="college" value="" />
+									</li>
+									<li>
+										<lable>邮箱</lable><input class="intput1" type="email" name="email" id="email" value="" />
+									</li>
+								</ul>
+							</div>
+							<div id="ringt2_right">
+								<ul>
+									<li>
+										<lable>学校</lable><input class="intput2" type="text" name="school" id="school" value="" />
+									</li>
+									<li>
+										<lable>专业</lable><input class="intput2" type="text" name="major" id="major" value="" />
+									</li>
+									<li>
+										<lable>电话</lable><input class="intput2" type="text" name="phone" id="phone" value="" />
+									</li>
+								</ul>
+							</div>
+						</div>
+						<div class="right2_bottom">
+							<input type="submit" name="submit2" id="submit2" value="确认修改" />
+						</div>
+					</div>
+				</div>
+				<div class="new_right" class="down_right3" id="btn7">
+					<div class="top">
+						<p class="p_left">修改密码</p>
+					</div>
+					<div class="right3">
+						<ul>
+							<li><label>原密码&nbsp;&nbsp;&nbsp;</label><input type="password" name="oldpwd" id="oldpwd" placeholder="原密码" /></li>
+							<li><label>新密码&nbsp;&nbsp;&nbsp;</label><input type="password" name="newpwd" id="newpwd" placeholder="新密码" /></li>
+							<li><label>确认密码</label><input type="password" name="surepwd" id="surepwd" placeholder="确认密码"/><p id="warn"></p></li>
+						</ul>
+					</div>
+					<div class="right3_bottom">
+						<input type="submit" name="submit" id="submit2" value="确认修改" onclick="updatePwd()"/>
+					</div>
+				</div>
+			</div>
+		</div>	
+		</div>
+		<div class="footer">
+			<div class="footer_up"></div>
+			<div class="footer_down">
+				<p class="copyrigth">SuperCommissary</p>
+				<div class="contact">
+					<div class="contact_left">
+						<p>联系我们</p>
+					</div>
+					<div class="contact_right">
+						<p class="change">qq：1228436617</p>
+						<p class="change">电话：17839911994</p>
+					</div>
+				</div>
+			</div>
+		</div>
+	</body>
+	<script type="text/javascript">
+		creatTable();
+		
+		var oBtn1 = document.getElementById('btn1');
+		var oImg1=document.getElementById('img1');
+		
+		var oBtn2 = document.getElementById('btn2');
+		var oImg2=document.getElementById('img2');
+		
+		var oBtn3 = document.getElementById('btn3');
+		var oImg3=document.getElementById('img3');
+		
+		var oBtn4 = document.getElementById('btn4');
+		var oImg4=document.getElementById('img4');
+		
+		var oBtn5 = document.getElementById('btn5');
+		var oBtn6 = document.getElementById('btn6');
+		var oBtn7 = document.getElementById('btn7');
+		
+		var arr=['img/add.png','img/info.png','img/pwd.png','img/cancel1.png'];
+		var arr1=['img/add1.png','img/info1.png','img/pwd1.png','img/cancel.png'];
+		
+		oBtn1.onclick=function(){
+			oImg1.src=arr[0];
+			oImg2.src=arr1[1];
+			oImg3.src=arr1[2];
+			oImg4.src=arr1[3];
+			oBtn1.className="new_person";
+			oBtn2.className="person";
+			oBtn3.className="person";
+			oBtn4.className="person";
+			oBtn5.className="down_right";
+			oBtn6.className="new_right";
+			oBtn7.className="new_right";
+		}
+		
+		oBtn2.onclick=function(){
+			oImg1.src=arr1[0];
+			oImg2.src=arr[1];
+			oImg3.src=arr1[2];
+			oImg4.src=arr1[3];
+			oBtn1.className="person";
+			oBtn2.className="new_person";
+			oBtn3.className="person";
+			oBtn4.className="person";
+			oBtn5.className="new_right";
+			oBtn6.className="down_right2";
+			oBtn7.className="new_right";
+			getUserInfo();
+		}
+		
+		oBtn3.onclick=function(){
+			oImg1.src=arr1[0];
+			oImg2.src=arr1[1];
+			oImg3.src=arr[2];
+			oImg4.src=arr1[3];
+			oBtn1.className="person";
+			oBtn2.className="person";
+			oBtn3.className="new_person";
+			oBtn4.className="person";
+			oBtn5.className="new_right";
+			oBtn6.className="new_right";
+			oBtn7.className="down_right3";
+		}
+		
+		var oBtn11 = document.getElementById("submit");
+		oBtn11.onclick=function(){
+			addAttention();
+		}
+		
+		var oBtn12 = document.getElementById("submit2");
+		oBtn12.onclick=function(){
+			updateUserInfo();
+		}
+	</script>
+</html>

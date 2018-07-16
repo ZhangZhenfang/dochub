@@ -1,0 +1,40 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<title>Insert title here</title>
+<script type="text/javascript" src="/dochub/js/jquery-3.2.1.min.js"></script>
+</head>
+<body>
+	<form action="/dochub/regist" method="post">
+		学号<input name="account" required="required"/><br>
+		学号<input name="studentnumber" required="required"/><br>
+		姓名<input name="name" required="required"/><br>
+		密码<input name="password" required="required"/><br>
+		电话<input name="phonenumber" required="required"/><br>
+		邮箱<input name="email" required="required"/><br>
+		学校<input name="school" required="required"/><br>
+		学院<input name="institute" required="required"/><br>
+		专业<input name="major" required="required"/><br>
+		<input type="submit" value="提交"/>
+	</form>
+</body>
+
+
+<script>
+	$.ajax({
+		url:"http://localhost:8080/dochub/users/auth",
+		type:"post",
+		data:{'account':'11503070303', 'password':'afang'},
+		async:false,
+		crossDomain:true,
+		xhrFields:{withCredentials:true},
+		success:function(data){
+			console.log(data);
+		},
+		error:function(data){
+			console.log(data)
+		}
+	})
+</script>
+</html>

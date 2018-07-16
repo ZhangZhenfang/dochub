@@ -1,0 +1,94 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>上传文件</title>
+	<link rel="stylesheet" type="text/css" href="css/header.css"/>
+	<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+	<link rel="stylesheet" type="text/css" href="css/upfile.css"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+	<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script src="js/upfile.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/header.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<header>
+	<div class="inne_c1">
+		<div id="logo">
+			<img src="img/house.png" style="float: left;"/><p style="float: left;">SuperCommissary</p>
+		</div>
+		<div id="nav">
+			<ul>
+				<li><a href="upfile.html" id="one">上传文件</a></li>
+				<li><a href="notice.html" id="two">我的公告</a></li>
+				<li><a href="uptable.html" id="three">我的表格</a></li>
+				<li><a href="mytable.html" id="four">填写表格</a></li>
+			</ul>
+		</div>
+		<div id="login">
+			<img src="img/login.png" style="float: left;"/>
+			<div class="dropdown">
+			  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    	<p id="username" style="float: left;">登录</p>
+			 	</button>
+			  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a href="personalCenter.html"><img src="img/person16.png"/><p>个人中心</p></a></li>
+				    <li role="separator" class="divider"></li>
+				    <li id="cancel_login"><a href="login.html"><img src="img/cancel16.png"/><p>注销</p></a></li>
+			  	</ul>
+			</div>
+		</div>
+	</div>
+	</header>
+	<div class="footer_up"></div>
+	<div id="content">
+	<div class="inne_c2">
+		<div id="notice">
+		<div class="panel-group" id="accordion">
+		</div>
+		</div>
+		<div id="find">
+			<div class="finds">
+				<input type="text" name="notice" id="notice" class="find_content" value="输入公众号" />
+				<input type="button" id="notice_find" class="find_button" value="查询" />
+			</div>
+			<div class="finds">
+				<input type="text" name="submit" id="submit" class="find_content" value="输入发布人姓名" />
+				<input type="button" id="submit_find" class="find_button" value="查询" />
+			</div>
+			<div class="finds">
+				<input type="button" id="submited" class="submit" value="还未提交" />
+				<input type="button" id="submiting" class="submit" value="已经提交" />
+			</div>
+		</div>
+	</div>
+	</div>
+    <div class="footer">
+		<div class="footer_up"></div>
+		<div class="footer_down">
+			<p class="copyrigth">SuperCommissary</p>
+			<div class="contact">
+				<div class="contact_left">
+					<p>联系我们</p>
+				</div>
+				<div class="contact_right">
+					<p class="change">邮箱 1228436617</p>
+					<p class="change">电话 17839911994</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var One = document.getElementById('one');
+	One.style.color = '#FD8420';
+	One.style.fontSize = '20px';
+	getUserinfo();
+	$(function () { $('.collapse').collapse('hide')});
+	getNoticesFromFriends();
+	document.getElementById("cancel_login").onclick=function(){
+		lagout();
+	}
+</script>
+</html>

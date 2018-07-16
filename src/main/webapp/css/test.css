@@ -1,0 +1,19 @@
+.hide{
+	display:none;
+}
+.show{
+	display:;
+}
+.active{
+	border:1px solid red;
+	background-color: black;
+    height: 50px;
+    width: 100%;
+	
+}
+.dead{
+	border:1px solid black;
+	background-color: white;
+    height: 50px;
+    width: 100%;
+}

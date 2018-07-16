@@ -1,0 +1,64 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<link href="css/test.css" rel="stylesheet">
+<title>Insert title here</title>
+</head>
+<body id="id">
+<button onclick="change()">登陆</button>
+	<button onclick="get()">提交</button>
+</body>
+
+	<script type="text/javascript">
+	
+		function change(){
+			//console.log(document.getElementById("idid"));
+			var cl = document.getElementById("idid").getAttribute("class");
+			cl = cl.replace("dead", "active");
+			console.log(cl);
+			if(cl == "dead"){
+				document.getElementById("idid").setAttribute("class", "active");	
+			}
+			else{
+				document.getElementById("idid").setAttribute("class", "dead");	
+			}
+		}
+		function test(){
+			$.ajax({
+				url:"http://www.the15373.com/Auth",
+				data:{'account':"11503070303", 'password':"afang"},
+				type:"POST",
+				async:false,
+				crossDomain:true,
+				xhrFields: {  withCredentials: true  },  
+				
+				success:function(data){alert(data.data)},
+				error:function(data){alert(data.data)}
+			})
+		}
+		function get(){
+			$.ajax({
+				url:"http://www.the15373.com/GetFriends",
+				data:{'account':"11503070303", 'password':"afang"},
+				type:"POST",
+				async:false,
+				crossDomain:true,
+				xhrFields: {  withCredentials: true  },  
+				
+				success:function(data){console.log(data)},
+				error:function(data){alert(data.data)}
+			})
+		}
+		var div = document.createElement("div");
+		div.setAttribute("class", "show");
+		div.setAttribute("id", "idid");
+		
+		div.innerHTML = "hello"
+		document.getElementById("id").appendChild(div);
+		
+	
+	</script>
+
+</html>

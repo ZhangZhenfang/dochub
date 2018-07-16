@@ -1,0 +1,424 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="UTF-8">
+<script type="text/javascript" src="js/jquery-3.2.1.min.js"></script>
+<script type="text/javascript" src="js/index.js"></script>
+<link href="https://cdn.bootcss.com/bootstrap/3.3.7/css/bootstrap.min.css" rel="stylesheet">
+<link href="css/index.css" rel="stylesheet">
+
+<title>Insert title here</title>
+</head>
+<body onload="onload()">
+        <div class="container">
+            <nav id="nav">
+                <ul>
+                    <li class="menu"><a onclick='javascript:switchdiv(0);alert("HOME");'>HOME</a></li>
+                    <li class="menu"><a onclick='javascript:switchdiv(1);getNoticeFromMyFriend();'>上传文件</a></li>
+                    <li class="menu"><a onclick='javascript:switchdiv(2);getMyNotice();'>我的公告</a></li>
+                    <li class="menu"><a onclick='javascript:switchdiv(3);getMyExcelFiles();'>我的表格</a></li>
+                    <li class="menu"><a onclick='javascript:switchdiv(4);getExcelFromFriends();'>填写表格</a></li>
+                    <li class="menu"><a onclick='javascript:switchdiv(5);addfriend();'>添加关注</a></li>
+                    <li class="menu"><a onclick='javascript:switchdiv(6);updateinfo()'>修改信息</a></li>
+                    <li class="menu"><a onclick='javascript:switchdiv(7);'>注册</a></li>
+                    <li class="menu"><a onclick='javascript:showModel("rePasswordModal", this)'>修改密码</a></li>
+                    <li id="user"><a onclick='javascript:onlogin();' id="loginbtn">登录</a></li>
+                    
+                </ul>
+            </nav>
+            <div id="home" class="switchablediv hide">
+                    This is home!
+            </div>
+            <div id="upfile" class="switchablediv hide">
+                <div class="input-group">
+                    <input type="text" class="form-control" id="searchInput" placeholder="输入公告名">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="javascript:alert('hi!');">查询</button>   
+                    </span>
+                    <input type="text" class="form-control" id="" placeholder="输入发布人姓名">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="javascript:alert('hi!');">查询</button>   
+                    </span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="javascript:alert('hi!');">未提交的</button>   
+                    </span>
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" type="button" onclick="javascript:alert('hi!');">已提交的</button>   
+                    </span>
+                    
+                </div>
+                
+                <div class="panel-group">
+                    
+                </div>
+            </div>
+            <div id="mynotice" class="switchablediv hide">
+                    <span class="input-group-btn">
+                        <button class="btn btn-default" id="newnoticebtn" type="button" onclick="javascript:showModel('newNoticeModal', this);">新建</button>   
+                    </span>
+                <div class="panel-group">
+                    
+                </div>
+            </div>
+            <div id="myexcel" class="switchablediv hide">
+                    <span class="input-group-btn">
+                            <button class="btn btn-default" id="newnoticebtn" type="button" onclick="javascript:showModel('newExcelModal', this);">新建</button>   
+                        </span>
+                <div class="panel-group">
+                    This is myexcel!
+                </div>
+            </div>
+
+            <div id="excelfilelist" class="switchablediv hide">
+                <div class="panel-group">
+                    This is excellist!
+                </div>
+            </div>
+
+            <div id='addfriend' class='switchablediv hide'>
+                请输入对方账号<input type="text" id="friendaccount" name="friendaccount" required="required" /> 	
+                <button onclick="newfriend()">关注</button>
+        
+                <br>已关注：<br>
+                <ul id="friendslist">
+        
+                </ul>
+            </div>
+            
+            <div id='updateinfo' class='switchablediv hide'>
+
+                    <form class="form-horizontal" role="form" id="updateinfoform">
+                            <div class="form-group">
+                                <label for="firstname" class="col-sm-2 control-label">姓名</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control updateuserinfoinput" placeholder="姓名">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">学校</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control updateuserinfoinput" placeholder="姓名">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">学院</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control updateuserinfoinput" placeholder="密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">专业</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control updateuserinfoinput" placeholder="重复密码">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">email</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control updateuserinfoinput" placeholder="e-mail">
+                                </div>
+                            </div>
+                            <div class="form-group">
+                                <label for="lastname" class="col-sm-2 control-label">电话</label>
+                                <div class="col-sm-10">
+                                    <input type="text" class="form-control updateuserinfoinput" placeholder="电话">
+                                </div>
+                            </div>
+                            
+                            <div class="form-group">
+                                <div class="col-sm-offset-2 col-sm-10">
+                                    <a onclick="senduserinfo()" class="btn btn-default" id="updateifnobtn">修改</a>
+                                </div>
+                            </div>
+                        </form>
+            </div>
+
+            <div id='regist' class='switchablediv hide'>
+                <form class="form-horizontal" role="form" id="registform">
+                    <div class="form-group">
+                        <label for="firstname" class="col-sm-2 control-label">学号</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control registinput" id="studentnumber" placeholder="学号">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">姓名</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control registinput" id="name" placeholder="姓名">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">密码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control registinput" id="password" placeholder="密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">重复密码</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control registinput" id="repassword" placeholder="重复密码">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">email</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control registinput" name="email" placeholder="e-mail">
+                        </div>
+                    </div>
+                    <div class="form-group">
+                        <label for="lastname" class="col-sm-2 control-label">电话</label>
+                        <div class="col-sm-10">
+                            <input type="text" class="form-control registinput" name="tel" placeholder="电话">
+                        </div>
+                    </div>
+                    
+                    <div class="form-group">
+                        <div class="col-sm-offset-2 col-sm-10">
+                            <a onclick="onregist()" class="btn btn-default">注册</a>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+
+        <form method="post" action="#" class="form-horizontal" role="form" id="loginForm" onsubmit="return ">
+                <div class="modal fade" id="loginModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                    <!--  定义模态框，过渡效果为淡入，id为myModal,tabindex=-1可以禁用使用tab切换，aria-labelledby用于引用模态框的标题，aria-hidden=true保持模态框在触发前窗口不可见  -->
+                    <div class="modal-dialog">
+                        <!--  显示模态框对话框模型（若不写下一个div则没有颜色）  -->
+                        <div class="modal-content">
+                            <!--  显示模态框白色背景，所有内容都写在这个div里面  -->
+        
+                            <div class="btn-info modal-header">
+                                <!--  模态框标题  -->
+                                <button type="button" class="close" data-dismiss="modal" id="loginFormCloseBtn" onclick="javascript:resetForm()">&times;</button>
+                                <!--  关闭按钮  -->
+                                <h4>登录</h4>
+                                <!--  标题内容  -->
+                            </div>
+        
+                            <div class="modal-body">
+                                <!--  模态框内容，我在此处添加一个表单 -->
+                                <!-- <form class="form-horizontal" role="form" id="userForm"> -->
+                                    
+                                    <div class="form-group">
+                                        <label for="name" class="col-sm-2 control-label">账号</label>
+                                        <div class="col-sm-9">
+                                            <input required="required" type="text" name="name" class="form-control well" placeholder="账号"/>
+                                        </div>
+                                    </div>
+                                    <div class="form-group">
+                                        <label for="tel" class="col-sm-2 control-label">密码</label>
+                                        <div class="col-sm-9">
+                                            <input required="required" type="password" name="password" class="form-control well" placeholder="密码"/>
+                                        </div>
+                                    </div>
+                                    
+                                <!-- </form> -->
+                            </div>
+        
+                            <div class="modal-footer">
+                                <!--  模态框底部样式，一般是提交或者确定按钮 -->
+                                <button type="button" class="btn btn-info" onclick="auth()">登&nbsp&nbsp&nbsp&nbsp录</button>
+                                <button type="button" class="btn btn-default" data-dismiss="modal"  onclick="javascript:resetForm()">取&nbsp&nbsp&nbsp&nbsp消</button>
+                            </div>
+                        </div><!-- /.modal-content -->
+                    </div>
+                </div> <!-- /.modal -->
+            </form>
+
+            <form method="post" action="#" class="form-horizontal" role="form" id="newNoticeForm" onsubmit="return ">
+                    <div class="modal fade" id="newNoticeModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                        <!--  定义模态框，过渡效果为淡入，id为myModal,tabindex=-1可以禁用使用tab切换，aria-labelledby用于引用模态框的标题，aria-hidden=true保持模态框在触发前窗口不可见  -->
+                        <div class="modal-dialog">
+                            <!--  显示模态框对话框模型（若不写下一个div则没有颜色）  -->
+                            <div class="modal-content">
+                                <!--  显示模态框白色背景，所有内容都写在这个div里面  -->
+            
+                                <div class="btn-info modal-header">
+                                    <!--  模态框标题  -->
+                                    <button type="button" class="close" data-dismiss="modal" id="newNoticeFormCloseBtn" onclick="javascript:resetForm()">&times;</button>
+                                    <!--  关闭按钮  -->
+                                    <h4>新建公告</h4>
+                                    <!--  标题内容  -->
+                                </div>
+            
+                                <div class="modal-body">
+                                    <!--  模态框内容，我在此处添加一个表单 -->
+                                    <!-- <form class="form-horizontal" role="form" id="userForm"> -->
+                                        
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 control-label">公告</label>
+                                            <div class="col-sm-9">
+                                                <input required="required" type="text" name="notice" class="form-control well" placeholder="姓名"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 control-label">开始时间</label>
+                                            <div class="col-sm-9">
+                                                <input required="required" type="date" name="startdate" class="form-control well" placeholder="姓名"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 control-label"></label>
+                                            <div class="col-sm-9">
+                                                <input required="required" type="time" name="starttime" class="form-control well" placeholder="姓名"/>
+                                            </div>
+                                        </div>
+                                        <div class="form-group">
+                                                <label for="name" class="col-sm-2 control-label">结束时间</label>
+                                                <div class="col-sm-9">
+                                                    <input required="required" type="date" name="deadlinedate" class="form-control well" placeholder="姓名"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 control-label"></label>
+                                                <div class="col-sm-9">
+                                                    <input required="required" type="time" name="deadlinetime" class="form-control well" placeholder="姓名"/>
+                                                </div>
+                                            </div>
+                                        <div class="form-group">
+                                            <label for="name" class="col-sm-2 control-label">注意事项</label>
+                                            <div class="col-sm-9">
+                                                <input required="required" type="text" name="description" class="form-control well" placeholder="注意事项"/>
+                                            </div>
+                                        </div>
+                                        
+                                    <!-- </form> -->
+                                </div>
+            
+                                <div class="modal-footer">
+                                    <!--  模态框底部样式，一般是提交或者确定按钮 -->
+                                                
+                                    <button type="button" class="btn btn-info" onclick="newNotice()">发&nbsp&nbsp&nbsp&nbsp布</button>
+                                    <button type="button" class="btn btn-default" data-dismiss="modal"  onclick="javascript:resetForm()">取&nbsp&nbsp&nbsp&nbsp消</button>
+                                </div>
+            
+                            </div><!-- /.modal-content -->
+                        </div>
+                    </div> <!-- /.modal -->
+                </form>
+
+
+                <form method="post" action="#" class="form-horizontal" role="form" id="newExcelForm" onsubmit="return ">
+                        <div class="modal fade" id="newExcelModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <!--  定义模态框，过渡效果为淡入，id为myModal,tabindex=-1可以禁用使用tab切换，aria-labelledby用于引用模态框的标题，aria-hidden=true保持模态框在触发前窗口不可见  -->
+                            <div class="modal-dialog">
+                                <!--  显示模态框对话框模型（若不写下一个div则没有颜色）  -->
+                                <div class="modal-content">
+                                    <!--  显示模态框白色背景，所有内容都写在这个div里面  -->
+                
+                                    <div class="btn-info modal-header">
+                                        <!--  模态框标题  -->
+                                        <button type="button" class="close" data-dismiss="modal" id="newExcelFormCloseBtn" onclick="javascript:resetForm()">&times;</button>
+                                        <!--  关闭按钮  -->
+                                        <h4>新建公告</h4>
+                                        <!--  标题内容  -->
+                                    </div>
+                
+                                    <div class="modal-body">
+                                        <!--  模态框内容，我在此处添加一个表单 -->
+                                        <!-- <form class="form-horizontal" role="form" id="userForm"> -->
+                                            
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 control-label">公告</label>
+                                                <div class="col-sm-9">
+                                                    <input required="required" type="file" name="file" class="form-control well"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 control-label">开始时间</label>
+                                                <div class="col-sm-9">
+                                                    <input required="required" type="date" name="startdate" class="form-control well"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 control-label"></label>
+                                                <div class="col-sm-9">
+                                                    <input required="required" type="time" name="starttime" class="form-control well"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                    <label for="name" class="col-sm-2 control-label">结束时间</label>
+                                                    <div class="col-sm-9">
+                                                        <input required="required" type="date" name="deadlinedate" class="form-control well"/>
+                                                    </div>
+                                                </div>
+                                                <div class="form-group">
+                                                    <label for="name" class="col-sm-2 control-label"></label>
+                                                    <div class="col-sm-9">
+                                                        <input required="required" type="time" name="deadlinetime" class="form-control well"/>
+                                                    </div>
+                                                </div>
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 control-label">注意事项</label>
+                                                <div class="col-sm-9">
+                                                    <input required="required" type="text" name="description" class="form-control well" placeholder="注意事项"/>
+                                                </div>
+                                            </div>
+                                            
+                                        <!-- </form> -->
+                                    </div>
+                
+                                    <div class="modal-footer">
+                                        <!--  模态框底部样式，一般是提交或者确定按钮 -->
+                                                    
+                                        <button type="button" class="btn btn-info" onclick="newExcel()">提&nbsp&nbsp&nbsp&nbsp交</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"  onclick="javascript:resetForm()">取&nbsp&nbsp&nbsp&nbsp消</button>
+                                    </div>
+                
+                                </div><!-- /.modal-content -->
+                            </div>
+                        </div> <!-- /.modal -->
+                    </form>
+                    <form method="post" action="#" class="form-horizontal" role="form" id="rePasswordForm" onsubmit="return ">
+                        <div class="modal fade" id="rePasswordModal"  tabindex="-1" role="dialog" aria-labelledby="myModalLabel" aria-hidden="true">
+                            <!--  定义模态框，过渡效果为淡入，id为myModal,tabindex=-1可以禁用使用tab切换，aria-labelledby用于引用模态框的标题，aria-hidden=true保持模态框在触发前窗口不可见  -->
+                            <div class="modal-dialog">
+                                <!--  显示模态框对话框模型（若不写下一个div则没有颜色）  -->
+                                <div class="modal-content">
+                                    <!--  显示模态框白色背景，所有内容都写在这个div里面  -->
+                
+                                    <div class="btn-info modal-header">
+                                        <!--  模态框标题  -->
+                                        <button type="button" class="close" data-dismiss="modal" onclick='javascript:resetForm();' id="rePasswordCloseBtn">&times;</button>
+                                        <!--  关闭按钮  -->
+                                        <h4>修改密码</h4>
+                                        <!--  标题内容  -->
+                                    </div>
+                
+                                    <div class="modal-body">
+                                        <!--  模态框内容，我在此处添加一个表单 -->
+                                        <!-- <form class="form-horizontal" role="form" id="userForm"> -->
+                                            
+                                            <div class="form-group">
+                                                <label for="name" class="col-sm-2 control-label">原密码</label>
+                                                <div class="col-sm-9">
+                                                    <input required="required" type="password" name="oldpassword" class="form-control well updatepasswordinput" placeholder="原密码"/>
+                                                </div>
+                                            </div>
+                                            <div class="form-group">
+                                                <label for="tel" class="col-sm-2 control-label">新密码</label>
+                                                <div class="col-sm-9">
+                                                    <input required="required" type="password" name="newpassword" class="form-control well updatepasswordinput" placeholder="新密码"/>
+                                                </div>
+                                            </div>
+                                            
+                                        <!-- </form> -->
+                                    </div>
+                
+                                    <div class="modal-footer">
+                                        <!--  模态框底部样式，一般是提交或者确定按钮 -->
+                                                    
+                                        <button type="button" class="btn btn-info" onclick='javascript:rePassword();'>确&nbsp&nbsp&nbsp&nbsp定</button>
+                                        <button type="button" class="btn btn-default" data-dismiss="modal"  onclick='javascript:resetForm();'>取&nbsp&nbsp&nbsp&nbsp消</button>
+                                    </div>
+                
+                                </div><!-- /.modal-content -->
+                            </div>
+                        </div> <!-- /.modal -->
+                    </form>
+    
+    </body>
+<script src="https://cdn.bootcss.com/bootstrap/3.3.7/js/bootstrap.min.js"></script>  
+</html>

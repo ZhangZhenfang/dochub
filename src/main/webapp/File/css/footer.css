@@ -1,0 +1,52 @@
+/*******************************************footer**********************************/
+.footer{
+	width: 100%;
+	height: 100px;	
+	margin-top: 80px;
+}
+
+.inne_c3{
+	width: 90%;
+	height: 60px;
+	margin-left: 5%;
+}
+
+.footer_up{
+	width: 100%;
+	height: 40px;
+	background-color: #FAFAFA;
+}
+.copyrigth{
+	text-align: center;
+	font-size: 16px;
+	line-height: 60px;
+	color: #666697;
+}
+.contact{
+	float: right;
+	margin-top: -60px;
+	width: 250px;
+	height: 60px;
+}
+.contact_left{
+	float: left;
+	width: 80px;
+	height: 100%;
+	text-align: center;
+	line-height: 30px;
+}
+.contact_right{
+	float: left;
+	width: 150px;
+	height: 100%;
+	text-align: center;
+	line-height: 10px;
+}
+.contact p{
+	font-size: 14px;
+	color: #666697;
+}
+.change:hover{
+	color: #fd8420;
+	font-size: 18px;
+}

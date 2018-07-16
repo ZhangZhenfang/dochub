@@ -1,0 +1,13 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE hibernate-reverse-engineering PUBLIC "-//Hibernate/Hibernate Reverse Engineering DTD 3.0//EN" "http://hibernate.org/dtd/hibernate-reverse-engineering-3.0.dtd" >
+
+<hibernate-reverse-engineering>
+  <table-filter match-catalog="dochub" match-name="excel"/>
+  <table-filter match-catalog="dochub" match-name="excelrecord"/>
+  <table-filter match-catalog="dochub" match-name="file"/>
+  <table-filter match-catalog="dochub" match-name="notice"/>
+  <table-filter match-catalog="dochub" match-name="relationship"/>
+  <table-filter match-catalog="dochub" match-name="sharefile"/>
+  <table-filter match-catalog="dochub" match-name="user"/>
+  <table-filter match-catalog="dochub" match-name="userlog"/>
+</hibernate-reverse-engineering>

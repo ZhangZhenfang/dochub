@@ -1,0 +1,148 @@
+<!DOCTYPE html>
+<html>
+<head>
+	<meta charset="UTF-8">
+	<title>我的表格</title>
+	<link rel="stylesheet" type="text/css" href="css/header.css"/>
+	<link rel="stylesheet" type="text/css" href="css/footer.css"/>
+	<link rel="stylesheet" type="text/css" href="css/uptable.css"/>
+	<link rel="stylesheet" type="text/css" href="css/bootstrap.min.css"/>
+	<script src="js/jquery-3.2.1.min.js" type="text/javascript" charset="utf-8"></script>
+	<script type="text/javascript" src="js/bootstrap.min.js"></script>
+	<script src="js/uptable.js" type="text/javascript" charset="utf-8"></script>
+	<script src="js/header.js" type="text/javascript" charset="utf-8"></script>
+</head>
+<body>
+	<header>
+	<div class="inne_c1">
+		<div id="logo">
+			<img src="img/house.png" style="float: left;"/><p style="float: left;">SuperCommissary</p>
+		</div>
+		<div id="nav">
+			<ul>
+				<li><a href="upfile.html" id="one">上传文件</a></li>
+				<li><a href="notice.html" id="two">我的公告</a></li>
+				<li><a href="uptable.html" id="three">我的表格</a></li>
+				<li><a href="mytable.html" id="four">填写表格</a></li>
+			</ul>
+		</div>
+		<div id="login">
+			<img src="img/login.png" style="float: left;"/>
+			<div class="dropdown">
+			  	<button class="btn btn-default dropdown-toggle" type="button" id="dropdownMenu1" data-toggle="dropdown" aria-haspopup="true" aria-expanded="true">
+			    	<p id="username" style="float: left;">登录</p>
+			 	</button>
+			  	<ul class="dropdown-menu" aria-labelledby="dropdownMenu1">
+				    <li><a href="personalCenter.html"><img src="img/person16.png"/><p>个人中心</p></a></li>
+				    <li role="separator" class="divider"></li>
+				    <li id="cancel_login"><a href="login.html"><img src="img/cancel16.png"/><p>注销</p></a></li>
+			  	</ul>
+			</div>
+		</div>
+	</div>
+	</header>
+	<div class="footer_up"></div>
+	<div id="content">
+	<div class="inne_c2">
+		<!-- Button trigger modal -->
+		<button type="button" class="btn btn-primary btn-lg" id="btn" data-toggle="modal" data-target="#myModal">
+		  	新建表格
+		</button>
+
+		<!-- Modal -->
+		<form action="" method="post" id="table_form" enctype="multipart/form-data">
+		<div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+		  	<div class="modal-dialog" role="document">
+		    	<div class="modal-content">
+		      		<div class="modal-header">
+		        		<button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+		        		<h4 class="modal-title" id="myModalLabel">新建表格</h4>
+			      	</div>
+			      	<div class="modal-body" id="modal_body">
+			        	<div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">表名</label>
+                            <div class="col-sm-9">
+                                <input required="required" type="file" name="filedata" class="form-control well" id="files"/>
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">开始时间</label>
+                            <div class="col-sm-9">
+                                <input required="required" type="date" name="startdate" class="form-control well" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-9">
+                                <input required="required" type="time" name="starttime" class="form-control well" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">结束时间</label>
+                            <div class="col-sm-9">
+                                <input required="required" type="date" name="deadlinedate" class="form-control well" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label"></label>
+                            <div class="col-sm-9">
+                                <input required="required" type="time" name="deadlinetime" class="form-control well" />
+                            </div>
+                        </div>
+                        <div class="form-group">
+                            <label for="name" class="col-sm-2 control-label">注意事项</label>
+                            <div class="col-sm-9">
+                                <input required="required" type="text" name="description" class="form-control well" />
+                            </div>
+                        </div>
+			      	</div>
+			      	<div class="modal-footer">
+			        	<button type="button" class="btn btn-default" data-dismiss="modal" id="cancel_btn">取消</button>
+			        	<button type="button" class="btn btn-primary" id="submit_btn">提交</button>
+			      	</div>
+		    	</div>
+		  	</div>
+		</div>
+		</form>
+		<div class="panel-group" id="accordion">
+		</div>
+	</div>
+	</div>
+    <div class="footer">
+		<div class="footer_up"></div>
+		<div class="footer_down">
+			<p class="copyrigth">SuperCommissary</p>
+			<div class="contact">
+				<div class="contact_left">
+					<p>联系我们</p>
+				</div>
+				<div class="contact_right">
+					<p class="change">qq：1228436617</p>
+					<p class="change">电话：17839911994</p>
+				</div>
+			</div>
+		</div>
+	</div>
+</body>
+<script type="text/javascript">
+	var Three = document.getElementById('three');
+	Three.style.color = '#FD8420';
+	Three.style.fontSize = '20px';
+	$(function () { $('.collapse').collapse('hide')});
+	getUserinfo();
+	getMyExcels();
+</script>
+<script type="text/javascript">
+	$('#myModal').on('shown.bs.modal', function () {
+	  	$('#myInput').focus()
+	})
+</script>
+<script type="text/javascript">
+	document.getElementById("submit_btn").onclick = function(){
+		buildTable();
+	}
+	document.getElementById("cancel_login").onclick=function(){
+		lagout();
+	}
+</script>
+</html>
