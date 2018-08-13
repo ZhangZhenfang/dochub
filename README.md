@@ -13,9 +13,26 @@
 
 jdk8、Spring、SpringMVC、Hibernate、MySql
 
-## 3、项目结构
+## 3、项目结构说明
+
+dochub
+
+​	|——doc				相关文档
+
+​	|——dochub-api 			接口
+
+​	|——dochub-common	通用工具
+
+​	|——dochub-service		服务实现，服务提供者
+
+​	|——dochub-web 		web应用，服务消费者
+
+​	|——pom.xml
 
 
 
+## 5、Contact me 
 
+- QQ:1228436617
+- Tel:17839911994
 
