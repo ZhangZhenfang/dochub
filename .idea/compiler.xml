@@ -1,0 +1,24 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="CompilerConfiguration">
+    <annotationProcessing>
+      <profile name="Maven default annotation processors profile" enabled="true">
+        <sourceOutputDir name="target/generated-sources/annotations" />
+        <sourceTestOutputDir name="target/generated-test-sources/test-annotations" />
+        <outputRelativeToContentRoot value="true" />
+        <module name="dochub-api" />
+        <module name="dochub-common" />
+        <module name="dochub-service" />
+        <module name="dochub-web" />
+      </profile>
+    </annotationProcessing>
+    <bytecodeTargetLevel>
+      <module name="dochub" target="1.8" />
+      <module name="dochub-api" target="1.8" />
+      <module name="dochub-common" target="1.8" />
+      <module name="dochub-service" target="1.8" />
+      <module name="dochub-web" target="1.8" />
+      <module name="springboot-dubbo-server" target="1.6" />
+    </bytecodeTargetLevel>
+  </component>
+</project>

@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<beans xmlns="http://www.springframework.org/schema/beans"
+       xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+       xmlns:dubbo="http://code.alibabatech.com/schema/dubbo" xmlns:aop="http://www.springframework.org/schema/aop"
+       xmlns:context="http://www.springframework.org/schema/context"
+       xsi:schemaLocation="http://www.springframework.org/schema/beans http://www.springframework.org/schema/beans/spring-beans.xsd
+       http://code.alibabatech.com/schema/dubbo http://code.alibabatech.com/schema/dubbo/dubbo.xsd http://www.springframework.org/schema/aop http://www.springframework.org/schema/aop/spring-aop.xsd http://www.springframework.org/schema/context http://www.springframework.org/schema/context/spring-context.xsd">
+    <dubbo:application name="demotest-consumer" owner="programmer" organization="dubbox" />
+    <!--向 zookeeper 订阅 provider 的地址，由 zookeeper 定时推送-->
+    <dubbo:registry address="zookeeper://localhost:2181" />
+    <!--使用 dubbo 协议调用定义好的 api.PermissionService 接口-->
+    <dubbo:reference id="excelrecordService" interface="com.the15373.dochub.service.ExcelrecordService"/>
+    <dubbo:reference id="excelService" interface="com.the15373.dochub.service.ExcelService"/>
+    <dubbo:reference id="fileService" interface="com.the15373.dochub.service.FileService"/>
+    <dubbo:reference id="noticeService" interface="com.the15373.dochub.service.NoticeService"/>
+    <dubbo:reference id="relationshipService" interface="com.the15373.dochub.service.RelationshipService"/>
+    <dubbo:reference id="userService" interface="com.the15373.dochub.service.UserService"/>
+
+</beans>

@@ -1,0 +1,8 @@
+<component name="ArtifactManager">
+  <artifact type="war" name="dochub-web:war">
+    <output-path>$PROJECT_DIR$/dochub-web/target</output-path>
+    <root id="archive" name="dochub-web.war">
+      <element id="artifact" artifact-name="dochub-web:war exploded" />
+    </root>
+  </artifact>
+</component>
