@@ -57,16 +57,18 @@ public class NoticeController {
 			String deadlinetime, String description,
 			String type, HttpServletRequest request) {
 		try {
-			User user = (User)request.getSession().getAttribute("user");
+			UserDto user = (UserDto)request.getSession().getAttribute("user");
 			Notice n = new Notice();
 			if(type == null) {
 				type = 1 + "";
 			}
+			User us = new User();
+			us.setUserid(Long.parseLong(user.getUserid()));
 			n.setStarttime(DateUtil.sdf.parse(startdate + " " + starttime + ":00"));
 			n.setDeadline(DateUtil.sdf.parse(deadlinedate + " " + deadlinetime + ":00"));	
 			n.setDescription(description);
 			n.setType(Integer.parseInt(type));
-			n.setUser(user);
+			n.setUser(us);
 			n.setNotice(notice);
 			
 			return noticeService.newNotice(n);

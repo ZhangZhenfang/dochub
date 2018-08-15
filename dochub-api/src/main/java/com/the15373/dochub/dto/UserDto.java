@@ -187,4 +187,28 @@ public class UserDto implements Serializable {
 		this.userlogs = userlogs;
 	}
 
+	@Override
+	public String toString() {
+		return "UserDto{" +
+				"userid='" + userid + '\'' +
+				", account='" + account + '\'' +
+				", studentnumber='" + studentnumber + '\'' +
+				", name='" + name + '\'' +
+				", password='" + password + '\'' +
+				", school='" + school + '\'' +
+				", institute='" + institute + '\'' +
+				", major='" + major + '\'' +
+				", classnumber='" + classnumber + '\'' +
+				", phonenumber='" + phonenumber + '\'' +
+				", email='" + email + '\'' +
+				", sex='" + sex + '\'' +
+				", notices=" + notices +
+				", excels=" + excels +
+				", files=" + files +
+				", excelrecords=" + excelrecords +
+				", relationships=" + relationships +
+				", sharefiles=" + sharefiles +
+				", userlogs=" + userlogs +
+				'}';
+	}
 }

@@ -12,7 +12,9 @@
     <modules>
         <module>dochub-common</module>
         <module>dochub-api</module>
-        <module>dochub-service</module>
+        <module>dochub-service-user</module>
+        <module>dochub-service-notice</module>
+        <module>dochub-service-excel</module>
         <module>dochub-web</module>
     </modules>
 
@@ -44,6 +46,13 @@
         </dependency>
 
         <!--导入的是日志相关的包 -->
+        <!-- https://mvnrepository.com/artifact/org.slf4j/slf4j-api -->
+        <dependency>
+            <groupId>org.slf4j</groupId>
+            <artifactId>slf4j-api</artifactId>
+            <version>1.7.25</version>
+        </dependency>
+
         <dependency>
             <groupId>log4j</groupId>
             <artifactId>log4j</artifactId>

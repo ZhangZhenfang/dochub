@@ -11,7 +11,7 @@ public interface UserService {
 
 	Map<String, String> regist(UserDto user);
 
-	UserDto auth(String account, String password);
+	UserDto auth(String account, StringBuffer password);
 
 	void login(String useragent, String ipAddr, UserDto user);
 
@@ -19,6 +19,6 @@ public interface UserService {
 
 	Map<String, String> updateUserinfo(UserDto user, UserDto old);
 
-	Map<String, String> updatePassword(String oldpassword, String newpassword, UserDto user);
+	Map<String, String> updatePassword(StringBuffer oldpassword, StringBuffer newpassword, UserDto user);
 
 }

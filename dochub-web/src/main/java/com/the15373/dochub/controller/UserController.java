@@ -7,6 +7,8 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
@@ -31,6 +33,8 @@ import com.the15373.dochub.util.GetIP;
 @Controller
 @RequestMapping("/users")
 public class UserController {
+	private static final Logger logger = LoggerFactory.getLogger(UserController.class);
+
 	@Resource 
 	UserService userService;
 	
@@ -46,7 +50,7 @@ public class UserController {
 	public Map<String, String> updatePassword(String oldpassword, String newpassword, HttpServletRequest request){
 		try {
 			UserDto user = (UserDto)request.getSession().getAttribute("user");
-			return userService.updatePassword(oldpassword, newpassword, user);
+			return userService.updatePassword(new StringBuffer(oldpassword), new StringBuffer(newpassword), user);
 		}catch (Exception e) {
 			e.printStackTrace();
 			Map<String, String> res = new HashMap<String, String>();
@@ -133,7 +137,11 @@ public class UserController {
 	public Map<String, String> regist(User user) {
 
 		try {
-			return userService.regist(user.toDto());
+			System.out.println("regist() parms : " + user.toString());
+			logger.info("regist() parms : " + user.toString());
+			UserDto u = user.toDto();
+			u.setPassword(user.getPassword());
+			return userService.regist(u);
 		}catch (Exception e) {
 			e.printStackTrace();
 			Map<String, String> res = new HashMap<String, String>();
@@ -161,7 +169,7 @@ public class UserController {
 		try {
 			Map<String, String> res = new HashMap<>();
 
-			UserDto user = userService.auth(account, password);
+			UserDto user = userService.auth(account, new StringBuffer(password));
 			System.out.println("afater");
 			if(user != null) {
 				@SuppressWarnings("unchecked")
