@@ -7,19 +7,19 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
 
+import com.the15373.dochub.dto.AbstractResponse;
+import com.the15373.dochub.dto.DefaultResponse;
+import com.the15373.dochub.dto.ErrorResponse;
+import com.the15373.dochub.dto.UserDto;
+import com.the15373.dochub.pojo.User;
+import com.the15373.dochub.util.GetIP;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.the15373.dochub.dto.AbstractResponse;
-import com.the15373.dochub.dto.DefaultResponse;
-import com.the15373.dochub.dto.ErrorResponse;
-import com.the15373.dochub.dto.UserDto;
-import com.the15373.dochub.pojo.User;
 import com.the15373.dochub.service.UserService;
-import com.the15373.dochub.util.GetIP;
 
 /**
  * 用户控制类

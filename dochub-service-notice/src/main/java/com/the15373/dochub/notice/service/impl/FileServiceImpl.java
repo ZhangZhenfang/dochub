@@ -1,5 +1,18 @@
-package com.the15373.dochub.service.impl;
+package com.the15373.dochub.notice.service.impl;
 
+import com.the15373.dochub.dao.FileDao;
+
+import com.the15373.dochub.dao.NoticeDao;
+import com.the15373.dochub.dto.*;
+import com.the15373.dochub.pojo.File;
+import com.the15373.dochub.pojo.Notice;
+import com.the15373.dochub.pojo.User;
+import com.the15373.dochub.service.FileService;
+import com.the15373.dochub.service.UserService;
+import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
+
+import javax.annotation.Resource;
 import java.io.FileInputStream;
 import java.io.FileOutputStream;
 import java.io.IOException;
@@ -7,28 +20,6 @@ import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
-
-import javax.annotation.Resource;
-
-import com.the15373.dochub.dao.UserDao;
-import com.the15373.dochub.dto.*;
-import com.the15373.dochub.service.UserService;
-import org.apache.commons.io.FileUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
-import org.springframework.stereotype.Service;
-import org.springframework.transaction.annotation.Transactional;
-
-import com.the15373.dochub.dao.FileDao;
-import com.the15373.dochub.dao.NoticeDao;
-import com.the15373.dochub.pojo.File;
-import com.the15373.dochub.pojo.Notice;
-import com.the15373.dochub.pojo.User;
-import com.the15373.dochub.service.FileService;
-
-
 
 /**
  * 文件上传业务类

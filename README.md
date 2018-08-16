@@ -17,19 +17,28 @@ jdk8、Spring、SpringMVC、Hibernate、MySql
 
 dochub
 
-​	|——doc				相关文档
+​	|——doc					相关文档
 
-​	|——dochub-api 			接口
+​	|——dochub-api 				接口
 
-​	|——dochub-common	通用工具
+​	|——dochub-common		通用工具
 
-​	|——dochub-service		服务实现，服务提供者
+​	|——dochub-service-excel 	excel表格上传和填写以及下载等服务实现
 
-​	|——dochub-web 		web应用，服务消费者
+​	|——dochub-service-notice 	文件收集功能相关服务实现
+
+​	|——dochub-service-user		用户相关功能服务实现
+
+​	|——dochub-web 			web应用，服务消费者
 
 ​	|——pom.xml
 
+## 4、启动流程
 
+1. 启动zookeeper
+2. 启动dochub-service-user
+3. 启动dochub-service-excel和dochub-service-notice
+4. 启动dochub-web
 
 ## 5、Contact me 
 

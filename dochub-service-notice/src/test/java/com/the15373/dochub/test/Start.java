@@ -1,4 +1,4 @@
-package privoder;
+package com.the15373.dochub.test;
 
 import org.springframework.context.ApplicationContext;
 import org.springframework.context.support.ClassPathXmlApplicationContext;

@@ -74,10 +74,10 @@
     <dubbo:service interface="com.the15373.dochub.service.FileService" ref="fileService" protocol="dubbo" />
     <dubbo:service interface="com.the15373.dochub.service.NoticeService" ref="noticeService" protocol="dubbo" />
 
-    <bean id="fileService" class="com.the15373.dochub.service.impl.FileServiceImpl"></bean>
-    <bean id="noticeService" class="com.the15373.dochub.service.impl.NoticeServiceImpl"></bean>
-    <bean id="noticeDao" class="com.the15373.dochub.dao.impl.NoticeDaoImpl"></bean>
-    <bean id="fileDao" class="com.the15373.dochub.dao.impl.FileDaoImpl"></bean>
+    <bean id="fileService" class="com.the15373.dochub.notice.service.impl.FileServiceImpl"></bean>
+    <bean id="noticeService" class="com.the15373.dochub.notice.service.impl.NoticeServiceImpl"></bean>
+    <bean id="noticeDao" class="com.the15373.dochub.notice.dao.impl.NoticeDaoImpl"></bean>
+    <bean id="fileDao" class="com.the15373.dochub.notice.dao.impl.FileDaoImpl"></bean>
     <!--使用 dubbo 协议调用定义好的 api.PermissionService 接口-->
     <dubbo:reference id="userService" interface="com.the15373.dochub.service.UserService"/>
 

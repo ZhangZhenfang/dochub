@@ -1,4 +1,4 @@
-package com.the15373.dochub.service.impl;
+package com.the15373.dochub.notice.service.impl;
 
 import java.io.File;
 import java.io.FileNotFoundException;
@@ -12,24 +12,18 @@ import java.util.Map;
 import javax.annotation.Resource;
 
 import com.the15373.dochub.dto.UserDto;
-import org.apache.commons.io.FileUtils;
-import org.springframework.http.HttpHeaders;
-import org.springframework.http.HttpStatus;
-import org.springframework.http.MediaType;
-import org.springframework.http.ResponseEntity;
+import com.the15373.dochub.dto.DefaultResponse;
+import com.the15373.dochub.dto.NoticeDto;
+import com.the15373.dochub.pojo.Notice;
+import com.the15373.dochub.util.Compress;
+import com.the15373.dochub.util.DateUtil;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.the15373.dochub.dao.FileDao;
 import com.the15373.dochub.dao.NoticeDao;
 import com.the15373.dochub.dto.AbstractResponse;
-import com.the15373.dochub.dto.DefaultResponse;
-import com.the15373.dochub.dto.NoticeDto;
-import com.the15373.dochub.pojo.Notice;
-import com.the15373.dochub.pojo.User;
 import com.the15373.dochub.service.NoticeService;
-import com.the15373.dochub.util.Compress;
-import com.the15373.dochub.util.DateUtil;
 
 /**
  * notice业务类

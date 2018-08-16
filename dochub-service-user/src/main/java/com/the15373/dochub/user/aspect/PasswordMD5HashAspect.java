@@ -1,4 +1,4 @@
-package com.the15373.dochub.user.com.the15373.dochub.user.aspect;
+package com.the15373.dochub.user.aspect;
 
 import com.the15373.dochub.dto.UserDto;
 import org.apache.shiro.crypto.hash.Md5Hash;

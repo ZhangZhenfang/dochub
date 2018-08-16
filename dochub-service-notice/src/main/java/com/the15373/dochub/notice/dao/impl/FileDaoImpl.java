@@ -1,16 +1,16 @@
-package com.the15373.dochub.dao.impl;
+package com.the15373.dochub.notice.dao.impl;
 
 import java.util.ArrayList;
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.the15373.dochub.dto.FileDto;
+import com.the15373.dochub.pojo.File;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.the15373.dochub.dao.FileDao;
-import com.the15373.dochub.dto.FileDto;
-import com.the15373.dochub.pojo.File;
 
 /**
  * 文件上传数据库访问对象

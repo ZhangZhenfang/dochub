@@ -87,8 +87,8 @@
     <bean id="userDao" class="com.the15373.dochub.user.dao.impl.UserDaoImpl"></bean>
     <bean id="relationshipDao" class="com.the15373.dochub.user.dao.impl.RelationshipDaoImpl" />
     <bean id="userlogDao" class="com.the15373.dochub.user.dao.impl.UserlogDaoImpl" />
-    <bean id="mD5Aspect" class="com.the15373.dochub.user.com.the15373.dochub.user.aspect.RegistMD5HashAspect" />
-    <bean id="passwordMD5HashAspect" class="com.the15373.dochub.user.com.the15373.dochub.user.aspect.PasswordMD5HashAspect" />
+    <bean id="mD5Aspect" class="com.the15373.dochub.user.aspect.RegistMD5HashAspect" />
+    <bean id="passwordMD5HashAspect" class="com.the15373.dochub.user.aspect.PasswordMD5HashAspect" />
     <!-- 配置事务管理器 -->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">

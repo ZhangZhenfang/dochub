@@ -1,4 +1,4 @@
-package com.the15373.dochub.dao.impl;
+package com.the15373.dochub.excel.dao.impl;
 
 import com.the15373.dochub.dao.ExcelDao;
 import com.the15373.dochub.dto.ExcelDto;
@@ -21,7 +21,7 @@ import java.util.Set;
  */
 
 @Repository("excelDao")
-public class ExcelDaoImpl implements ExcelDao{
+public class ExcelDaoImpl implements ExcelDao {
 	@Resource
 	private SessionFactory sessionFactory;
 	

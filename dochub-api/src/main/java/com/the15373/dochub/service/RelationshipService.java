@@ -8,7 +8,6 @@ import java.util.Map;
 
 import com.the15373.dochub.dto.UserDto;
 import com.the15373.dochub.pojo.Relationship;
-import com.the15373.dochub.pojo.User;
 
 public interface RelationshipService {
 

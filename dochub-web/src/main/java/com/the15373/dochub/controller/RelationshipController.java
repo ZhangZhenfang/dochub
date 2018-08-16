@@ -5,15 +5,14 @@ import java.util.List;
 import java.util.Map;
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
-import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
-import com.the15373.dochub.pojo.User;
+
 import com.the15373.dochub.dto.AbstractResponse;
 import com.the15373.dochub.dto.DefaultResponse;
 import com.the15373.dochub.dto.ErrorResponse;
-
 import com.the15373.dochub.dto.UserDto;
+import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestMapping;
+import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.the15373.dochub.pojo.Relationship;
 import com.the15373.dochub.service.RelationshipService;
@@ -37,7 +36,7 @@ public class RelationshipController {
 	 */
 	@ResponseBody
 	@RequestMapping("/getRelationship")
-    public AbstractResponse  getRelationship(HttpServletRequest request) {
+    public AbstractResponse getRelationship(HttpServletRequest request) {
 		try {
 			
 			UserDto user=(UserDto)request.getSession().getAttribute("user");

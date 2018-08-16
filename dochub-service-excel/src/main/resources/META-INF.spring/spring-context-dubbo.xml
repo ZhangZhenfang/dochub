@@ -81,10 +81,10 @@
     <!--使用 dubbo 协议调用定义好的 api.PermissionService 接口-->
     <dubbo:reference id="userService" interface="com.the15373.dochub.service.UserService"/>
 
-    <bean id="excelRecordService" class="com.the15373.dochub.excelservice.impl.ExcelrecordServiceImpl"></bean>
-    <bean id="excelService" class="com.the15373.dochub.excelservice.impl.ExcelServiceImpl"></bean>
-    <bean id="excelRecordDao" class="com.the15373.dochub.dao.impl.ExcelrecordDaoImpl"></bean>
-    <bean id="excelDao" class="com.the15373.dochub.dao.impl.ExcelDaoImpl"></bean>
+    <bean id="excelRecordService" class="com.the15373.dochub.excel.excelservice.impl.ExcelrecordServiceImpl"></bean>
+    <bean id="excelService" class="com.the15373.dochub.excel.excelservice.impl.ExcelServiceImpl"></bean>
+    <bean id="excelRecordDao" class="com.the15373.dochub.excel.dao.impl.ExcelrecordDaoImpl"></bean>
+    <bean id="excelDao" class="com.the15373.dochub.excel.dao.impl.ExcelDaoImpl"></bean>
     <!-- 配置事务管理器 -->
     <bean id="transactionManager"
           class="org.springframework.orm.hibernate5.HibernateTransactionManager">

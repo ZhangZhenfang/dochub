@@ -2,8 +2,8 @@ package com.the15373.dochub.user.dao.impl;
 
 import com.the15373.dochub.dao.RelationshipDao;
 import com.the15373.dochub.dto.UserDto;
-import com.the15373.dochub.pojo.Relationship;
 import com.the15373.dochub.pojo.User;
+import com.the15373.dochub.pojo.Relationship;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 

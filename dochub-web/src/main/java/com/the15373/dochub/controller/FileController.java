@@ -7,6 +7,9 @@ import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
 import com.the15373.dochub.dto.UserDto;
+import com.the15373.dochub.dto.AbstractResponse;
+import com.the15373.dochub.dto.ErrorResponse;
+import com.the15373.dochub.util.UpUtils;
 import org.apache.commons.io.FileUtils;
 import org.springframework.http.HttpHeaders;
 import org.springframework.http.HttpStatus;
@@ -17,11 +20,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
 
-import com.the15373.dochub.dto.AbstractResponse;
-import com.the15373.dochub.dto.ErrorResponse;
-import com.the15373.dochub.pojo.User;
 import com.the15373.dochub.service.FileService;
-import com.the15373.dochub.util.UpUtils;
 
 /**
  * 文件上传控制类

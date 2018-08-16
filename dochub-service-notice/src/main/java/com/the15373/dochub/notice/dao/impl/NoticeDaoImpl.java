@@ -1,14 +1,14 @@
-package com.the15373.dochub.dao.impl;
+package com.the15373.dochub.notice.dao.impl;
 
 import java.util.List;
 
 import javax.annotation.Resource;
 
+import com.the15373.dochub.pojo.Notice;
 import org.hibernate.SessionFactory;
 import org.springframework.stereotype.Repository;
 
 import com.the15373.dochub.dao.NoticeDao;
-import com.the15373.dochub.pojo.Notice;
 
 /**
  * notice数据库访问对象

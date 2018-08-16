@@ -9,7 +9,6 @@ import javax.servlet.http.HttpSessionEvent;
 import javax.servlet.http.HttpSessionListener;
 
 import com.the15373.dochub.dto.UserDto;
-import com.the15373.dochub.pojo.User;
 
 /**
  * Application Lifecycle Listener implementation class SessionListener
