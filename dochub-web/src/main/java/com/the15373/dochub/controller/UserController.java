@@ -50,6 +50,7 @@ public class UserController {
 	public Map<String, String> updatePassword(String oldpassword, String newpassword, HttpServletRequest request){
 		try {
 			UserDto user = (UserDto)request.getSession().getAttribute("user");
+			logger.info("user " + user.getUserid() + " @updatePassword("+ oldpassword + ", " + newpassword + ")");
 			return userService.updatePassword(new StringBuffer(oldpassword), new StringBuffer(newpassword), user);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -72,6 +73,7 @@ public class UserController {
 	public Map<String, String> updateUserinfo(User user, HttpServletRequest request){
 		try {
 			UserDto old = (UserDto)request.getSession().getAttribute("user");
+			logger.info("user " + user.getUserid() + " @updatePassword("+ user.toString() + ")");
 			return userService.updateUserinfo(user.toDto(), old);
 		}catch (Exception e) {
 			e.printStackTrace();
@@ -134,11 +136,9 @@ public class UserController {
 	 */
 	@ResponseBody
 	@RequestMapping("/regist")
-	public Map<String, String> regist(User user) {
-
+	public Map<String, String> regist(User user, HttpServletRequest request) {
 		try {
-			System.out.println("regist() parms : " + user.toString());
-			logger.info("regist() parms : " + user.toString());
+			logger.info(GetIP.getIpAddr(request) + " @regist() parms : " + user.toString());
 			UserDto u = user.toDto();
 			u.setPassword(user.getPassword());
 			return userService.regist(u);
@@ -162,15 +162,10 @@ public class UserController {
 	@ResponseBody
 	@RequestMapping("/auth")
 	public Map<String, String> auth(String account, String password, HttpServletRequest request) {
-
-		System.out.println(account);
-		System.out.println(password);
-		System.out.println("before");
+		logger.info(GetIP.getIpAddr(request) + " @auth() " + account + " : " + password);
 		try {
 			Map<String, String> res = new HashMap<>();
-
 			UserDto user = userService.auth(account, new StringBuffer(password));
-			System.out.println("afater");
 			if(user != null) {
 				@SuppressWarnings("unchecked")
 				Map<String, HttpSession> users = (Map<String, HttpSession>)request.getSession().getServletContext().getAttribute("users");

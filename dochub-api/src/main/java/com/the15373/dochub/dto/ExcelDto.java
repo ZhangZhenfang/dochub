@@ -24,6 +24,7 @@ public class ExcelDto implements Serializable {
 	private String description;
 	private String filename;
 	private String path;
+	private String head;
 	private ExcelrecordDto mysubmit; 
 	public ExcelrecordDto getMysubmit() {
 		return mysubmit;
@@ -96,4 +97,27 @@ public class ExcelDto implements Serializable {
 		this.excelrecords = excelrecords;
 	}
 
+	public String getHead() {
+		return head;
+	}
+
+	public void setHead(String head) {
+		this.head = head;
+	}
+
+	@Override
+	public String toString() {
+		return "ExcelDto{" +
+				"excelid='" + excelid + '\'' +
+				", user=" + user +
+				", starttime='" + starttime + '\'' +
+				", deadline='" + deadline + '\'' +
+				", description='" + description + '\'' +
+				", filename='" + filename + '\'' +
+				", path='" + path + '\'' +
+				", head='" + head + '\'' +
+				", mysubmit=" + mysubmit +
+				", excelrecords=" + excelrecords +
+				'}';
+	}
 }

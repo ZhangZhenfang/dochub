@@ -38,7 +38,7 @@ public class FileServiceImpl implements FileService {
 	@Resource
 	private NoticeDao noticeDao;
 	@Override
-	public Map<String, String> uploadFile(String baseDir, String tmpPath, String fileName, long noticeid, UserDto user) throws IOException {
+	public Map<String, String> uploadFile(String baseDir, String fileName, long noticeid, UserDto user, String md5) throws IOException {
 		Notice notice = noticeDao.getByNoticeId(noticeid);
 		boolean f;
 		if(notice != null) {
@@ -48,10 +48,6 @@ public class FileServiceImpl implements FileService {
 				f = true;
 			}
 			else {
-				java.io.File fi = new java.io.File(baseDir + file.getPath());
-				if(fi.exists()) {
-					fi.delete();
-				}
 				f = false;
 			}
 			UserDto u = userService.getByAccount(user.getAccount());
@@ -61,29 +57,16 @@ public class FileServiceImpl implements FileService {
 			file.setTime(new Date());
 			file.setUser(us);
 			file.setNotice(notice);
-			file.setPath(notice.getPath() + java.io.File.separator + file.getFilename());
-			
-			FileInputStream fis = new FileInputStream(new java.io.File(tmpPath));
-			java.io.File fil = new java.io.File(baseDir + notice.getPath());
-			if(!fil.exists()) {
-				fil.mkdirs();
-			}
-			FileOutputStream fos = new FileOutputStream(new java.io.File(baseDir + file.getPath()));
-			
-			byte[] bytes = new byte[2048];
-			int len;
-			while((len = fis.read(bytes)) != -1) {
-				fos.write(bytes, 0, len);
-			}
-			fis.close();
-			fos.close();
+			String path = (notice.getPath().endsWith("/") || notice.getPath().endsWith("\\")) ? notice.getPath() + file.getFilename()
+					: notice.getPath() + "/" + file.getFilename();
+			file.setPath(path);
+			file.setMd5(md5);
 			if(f == true) {
 				fileDao.save(file);
 			}
 			else {
 				fileDao.update(file);
 			}
-			
 			Map<String, String> res = new HashMap<>();
 			res.put("status", "1");
 			return res;

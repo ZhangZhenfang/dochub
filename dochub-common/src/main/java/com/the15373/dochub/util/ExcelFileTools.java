@@ -30,7 +30,8 @@ public class ExcelFileTools
 	}
 	
 	public static void addExcel(File file, File out, ArrayList<String[]> args, int l) throws IOException 
-	{  
+	{
+		System.out.println("@" + Thread.currentThread().getName());
 		Workbook wb = null;
     	if(file.getPath().endsWith(".xlsx"))
     		wb = new XSSFWorkbook(new FileInputStream(file));

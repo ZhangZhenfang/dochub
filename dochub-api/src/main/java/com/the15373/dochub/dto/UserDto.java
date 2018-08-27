@@ -27,6 +27,7 @@ public class UserDto implements Serializable {
 	private String phonenumber;
 	private String email;
 	private String sex;
+	private String time;
 	private Set<NoticeDto> notices = new HashSet<NoticeDto>(0);
 	private Set<ExcelDto> excels = new HashSet<ExcelDto>(0);
 	private Set<FileDto> files = new HashSet<FileDto>(0);
@@ -185,6 +186,14 @@ public class UserDto implements Serializable {
 
 	public void setUserlogs(Set<UserlogDto> userlogs) {
 		this.userlogs = userlogs;
+	}
+
+	public String getTime() {
+		return time;
+	}
+
+	public void setTime(String time) {
+		this.time = time;
 	}
 
 	@Override

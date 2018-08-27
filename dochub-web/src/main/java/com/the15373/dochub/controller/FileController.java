@@ -38,22 +38,23 @@ public class FileController {
 	
 	/**
 	 * 上传文件到某一个公告
-	 * @param filedata 文件
+	 * @param fileName
+	 * @param md5
 	 * @param noticeid 公告notice的id
 	 * @param request
 	 * @return 状态码
 	 */
 	@ResponseBody
 	@RequestMapping("/uploadFile")
-	private Map<String, String> uploadFile(MultipartFile filedata, String noticeid,
+	private Map<String, String> uploadFile(String fileName, String md5, String noticeid,
 			HttpServletRequest request){
 		try {
-			String tmpPath = UpUtils.getSrc(filedata, request);
+//			String tmpPath = UpUtils.getSrc(filedata, request);
 			String baseDir = request.getSession().getServletContext().getInitParameter("baseDir");
-			String fileName = filedata.getOriginalFilename();
+//			String fileName = filedata.getOriginalFilename();
 			UserDto user = (UserDto) request.getSession().getAttribute("user");
 			
-			return fileService.uploadFile(baseDir, tmpPath, fileName, Long.parseLong(noticeid), user); 
+			return fileService.uploadFile(baseDir, fileName, Long.parseLong(noticeid), user, md5);
 		}catch (Exception e) {
 			e.printStackTrace();
 			Map<String, String> res = new HashMap<>();

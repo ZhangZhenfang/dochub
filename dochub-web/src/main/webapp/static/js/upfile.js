@@ -71,7 +71,7 @@ function createBody(data){
 	}
 	else{
 		a.innerHTML = data.mysubmt.filename;
-		a.setAttribute("onClick", "downloadfile(" + data.mysubmt.fileid + ")");
+		a.setAttribute("onClick", "downloadfile('" + data.mysubmt.md5 + "')");
 	}
 	// getFileByNoticeAndUserid(data.noticeid, a);
 	a.setAttribute("style", "text-decoration: none; color: #000000;");
@@ -80,6 +80,8 @@ function createBody(data){
 	var inputFile = document.createElement("input");
 	inputFile.setAttribute("class", "filedata");
 	inputFile.setAttribute("type", "file");
+	inputFile.setAttribute("id", data.noticeid);
+    inputFile.setAttribute("userid", data.user.userid);
 	var inputSave = document.createElement("input");
 	inputSave.setAttribute("class", "save");
 	inputSave.setAttribute("type", "button");
@@ -109,59 +111,43 @@ function uploadFile(node, id){
 		file.focus();
 		return ;
 	}else{
-		var formdata = new FormData();
-		if(file.files[0].size > 20971520){
-			alert("文件不能超过20MB");
-			return ;
-		}
-		document.getElementById("waitmodalbutton").click();
-		formdata.append("filedata", file.files[0]);
-		formdata.append("noticeid", id);
-		$.ajax({
-			url:url + "/files/uploadFile",
-			data:formdata,
-			type:"post",
-			async:true,
-			contentType: false,
-			processData: false,
-			xhrFields: {  withCredentials: true  },
-			xhr: function(){ //获取ajaxSettings中的xhr对象，为它的upload属性绑定progress事件的处理函数  
-				myXhr = $.ajaxSettings.xhr();
-				if(myXhr.upload){ // check if upload property exists
-					myXhr.upload.addEventListener('progress',function(e){                            
-						var loaded = e.loaded;                  //已经上传大小情况 
-						var total = e.total;                      //附件总大小 
-						var percent = Math.floor(100*loaded/total)+"%";     //已经上传的百分比  
-						// console.log("已经上传了："+"width: " + percent + "%;");    
-						document.getElementById("processbar").setAttribute("style", "width: " + percent + ";");             
-						// $("#processbar").css("width",percent);                                                                
-					}, false); // for handling the progress of the upload
-				}
-				return myXhr;
-			},
-            success:function(data){
-				console.log(data);
-				if(data.status == 0){
-					alert("清先登陆");
-					window.location.href = "login.html";
-				}
-				if(data.status == 1){
-					alert("上传成功");
-					document.getElementById("waitmodalcancel").click();
-					window.location.reload();
-				}
-				else{
-					alert("上传失败");
-				}
-            	
-            },
-            error:function(data){
-            	console.log(data)
-            }
-		});
+        if(file.files[0].size > 20971520 * 5){
+            alert("文件不能超过100MB");
+            return ;
+        }
+        console.log(file.getAttribute("userid"));
+        upfile('', file.getAttribute("id"), file.getAttribute("userid"), id, finalFunction);
 	}
 }
+function finalFunction(fileName, md5, noticeid) {
+    $.ajax({
+	url:url + "/files/uploadFile",
+	data:{"fileName" : fileName, "md5" : md5, "noticeid" : noticeid},
+	type:"post",
+	async:false,
+	xhrFields: {  withCredentials: true  },
+	success:function(data){
+		console.log(data);
+		if(data.status == 0){
+			alert("清先登陆");
+			window.location.href = "login.html";
+		}
+		if(data.status == 1){
+			alert("上传成功");
+			// document.getElementById("waitmodalcancel").click();
 
+			window.location.reload();
+		}
+		else{
+			alert("上传失败");
+		}
+
+	},
+	error:function(data){
+		console.log(data)
+	}
+});
+}
 function getNoticesFromFriends(){
 	$.ajax({
 		url:url + "/notices/getNoticesFromFriends",
@@ -229,8 +215,10 @@ function getFileByNoticeAndUserid(id, a){
 
 function downloadfile(fileid){
 	// alert(fileid);
+	console.log("download " + fileid);
 	var a = document.createElement('a');
-	a.href = url + "/files/downloadFile?fileid=" + fileid;
+	// a.href = url + "/files/downloadFile?fileid=" + fileid;
+    a.href = fileServer + "/downloadFile?md5=" + fileid;
 	$("body").append(a); 
 	a.click();
 	$(a).remove();

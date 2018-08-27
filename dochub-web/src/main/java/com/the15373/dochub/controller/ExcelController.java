@@ -1,18 +1,21 @@
 package com.the15373.dochub.controller;
 
 import java.io.File;
+import java.io.FileInputStream;
+import java.io.FileOutputStream;
 import java.text.ParseException;
+import java.util.ArrayList;
 import java.util.HashMap;
+import java.util.List;
 import java.util.Map;
 
 import javax.annotation.Resource;
 import javax.servlet.http.HttpServletRequest;
 
-import com.the15373.dochub.dto.UserDto;
-import com.the15373.dochub.dto.AbstractResponse;
-import com.the15373.dochub.dto.ErrorResponse;
+import com.the15373.dochub.dto.*;
 import com.the15373.dochub.pojo.Excel;
 import com.the15373.dochub.util.DateUtil;
+import com.the15373.dochub.util.ExcelFileTools;
 import com.the15373.dochub.util.UpUtils;
 import com.the15373.dochub.service.UserService;
 import org.apache.commons.collections4.map.HashedMap;
@@ -22,6 +25,7 @@ import org.springframework.http.HttpStatus;
 import org.springframework.http.MediaType;
 import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Controller;
+import org.springframework.transaction.annotation.Transactional;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.ResponseBody;
 import org.springframework.web.multipart.MultipartFile;
@@ -64,7 +68,25 @@ public class ExcelController {
 		try {
 			String baseDir = request.getSession().getServletContext().getInitParameter("baseDir");
 			UserDto user = (UserDto) request.getSession().getAttribute("user");
-			return excelService.excelToTable(baseDir, Long.parseLong(excelId), user);
+			ArrayList<String[]> data = excelService.excelToTable(baseDir, Long.parseLong(excelId), user);
+			if(data == null){
+				ErrorResponse res = new ErrorResponse();
+				res.setStatus("003003");
+				res.setErrors("该excel不存在");
+				return res;
+			}
+			else{
+				String path = data.get(data.size() - 1)[0];
+				String tmpPath = data.get(data.size() - 1)[1];
+				data.remove(data.size() - 1);
+				ExcelFileTools.addExcel(new File(path), new File(tmpPath), data, data.size());
+				String str = ExcelFileTools.Excel2Table(tmpPath, excelId + "");
+				DefaultResponse<String> res = new DefaultResponse<>();
+				res.setData(str);
+				res.setStatus("1");
+				return res;
+			}
+
 		}catch (NumberFormatException e) {
 			ErrorResponse res = new ErrorResponse();
 			res.setStatus("003003");
@@ -177,8 +199,20 @@ public class ExcelController {
 	@RequestMapping("/getExcelFromFriends")
 	public AbstractResponse getExcelFromFriends(HttpServletRequest request){
 		try {
+			String baseDir = request.getServletContext().getInitParameter("baseDir");
 			UserDto user = (UserDto) request.getSession(false).getAttribute("user");
-			return excelService.getExcelFromFriends(user);
+			DefaultResponse<List<ExcelDto>> res = (DefaultResponse<List<ExcelDto>>)excelService.getExcelFromFriends(user);
+			for(ExcelDto e : res.getData()){
+				System.out.println(e.toString());
+				if(e.getHead() == null || e.getHead() == ""){
+					String table = ExcelFileTools.Excel2Table(
+							baseDir + e.getPath(), e.getExcelid() + "");
+					System.out.print(table);
+					e.setHead(table);
+				}
+			}
+
+			return res;
 		}catch (Exception e) {
 			e.printStackTrace();
 			ErrorResponse res = new ErrorResponse();
@@ -219,11 +253,13 @@ public class ExcelController {
 	 * @param request
 	 * @return 返回请求状态码
 	 */
+	@Transactional
 	@ResponseBody
 	@RequestMapping("/uploadExcel")
-	public Map<String, String> uploadExcel(MultipartFile filedata, String startdate, String starttime, 
-			String deadlinedate, String deadlinetime, String description, HttpServletRequest request){
-		
+	public Map<String, String> uploadExcel(MultipartFile filedata, String startdate, String starttime,
+										   String deadlinedate, String deadlinetime, String description,
+										   HttpServletRequest request){
+
 		String baseDir = request.getServletContext().getInitParameter("baseDir");
 		UserDto user = (UserDto) request.getSession(false).getAttribute("user");
 		try {
@@ -234,8 +270,39 @@ public class ExcelController {
 			System.out.println(filedata.getOriginalFilename());
 			String tmpPath = UpUtils.getSrc(filedata, request);
 			excel.setFilename(filedata.getOriginalFilename());
-			return excelService.uploadExcel(tmpPath, baseDir, excel, user);
-			
+			String path = "excelfiles/" + user.getUserid() + "/" + excel.getFilename();
+			excel.setPath(path);
+			File file = new File(baseDir + "excelfiles/" + user.getUserid());
+			if(!file.exists()) {
+				file.mkdirs();
+			}
+			FileInputStream is = new FileInputStream(new File(tmpPath));
+			FileOutputStream os = new FileOutputStream(new File(baseDir + path));
+			int len;
+			byte[] bytes = new byte[2048];
+
+			while((len = is.read(bytes)) != -1) {
+				os.write(bytes, 0, len);
+			}
+			is.close();
+			os.close();
+			if(new File(baseDir + path).exists()) {
+				Long id = excelService.uploadExcel(tmpPath, baseDir, excel, user);
+				excel.setExcelid(id);
+				String table = ExcelFileTools.Excel2Table(
+						baseDir + excel.getPath(), id + "");
+				excel.setHead(table);
+				excelService.update(excel);
+				Map<String, String> res = new HashedMap<>();
+				res.put("status", 1 + "");
+				return res;
+			}
+			else {
+				Map<String, String> res = new HashedMap<>();
+				res.put("status", 2 + "");
+				return res;
+			}
+//			return excelService.uploadExcel(tmpPath, baseDir, excel, user);
 		}catch (ParseException e) {
 			e.printStackTrace();
 			Map<String, String> res = new HashedMap<>();
@@ -266,10 +333,23 @@ public class ExcelController {
 			if(!(baseDir.endsWith("\\") || baseDir.endsWith("/"))) {
 				baseDir += File.separator;
 			}
-			String tmpPath = excelService.downloadExcel(baseDir, Long.parseLong(excelid), user);
-			String[] tmp = tmpPath.split("~");
-			tmpPath = tmp[0];
-			String fileName = tmp[1];
+			ExcelDto e = excelService.getById(user, Long.parseLong(excelid));
+			ArrayList<String[]> data = excelService.downloadExcel(baseDir, Long.parseLong(excelid), user);
+			String path = data.get(data.size() - 1)[0];
+			String tmpPath = data.get(data.size() - 1)[1];
+			String fileName = data.get(data.size() - 1)[2];
+			data.remove(data.size() - 1);
+			System.out.println(data.size());
+			for(String[] strs : data){
+				for(String str : strs){
+					System.out.print(str + " ");
+				}
+				System.out.println();
+			}
+
+			System.out.print(data.size());
+
+			ExcelFileTools.addExcel(new File(path), new File(tmpPath), data, data.size());
 
 			File file = new File(tmpPath);
 			HttpHeaders headers = new HttpHeaders();

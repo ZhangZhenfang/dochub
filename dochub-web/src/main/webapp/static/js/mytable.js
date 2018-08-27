@@ -120,7 +120,8 @@ function getExcelFromFriends(){
 			if(data.status == 1){
 				for(var i = 0; i < data.data.length; i++){
 					var div = document.createElement("div");
-					getExcelHead(data.data[i].excelid, div);
+					getExcelHead(data.data[i].head, div, data.data[i].excelid);
+
 					if(data.data[i].mysubmit == null){
 						
 					}
@@ -154,45 +155,20 @@ function getExcelFromFriends(){
 	})
 }
 
-function getExcelHead(id, d){
-	$.ajax({
-		url:url + "/excels/getExcelHead",
-		type:"post",
-		async:false,
-		data:{"excelId":id},
-		crossDomain:true,
-		xhrFields: {  withCredentials: true  }, 
-		success:function(data){
-			if(data.status == 0){
-				alert("清先登陆");
-				window.location.href = "login.html";
-			}
-			if(data.status == 1){
-				var tablestr = data.data.split("::")[0];
-				d.innerHTML = tablestr;
-				var table = d.getElementsByTagName("table")[0];
-				table.setAttribute("id", "table" + id);
-				// table = table.replace("</table>", "");
-				var n = data.data.split("::")[2];
-				// var t = document.createElement("table");
-				// t.setAttribute("class", "table");
-				var row = table.insertRow();
-				for(var i = 0; i < n; i++){
-					var cell = row.insertCell(i);
-					var input = document.createElement("input");
-					input.setAttribute("type", "text");
-					input.setAttribute("class", "table-input" + id);
-					cell.appendChild(input);
-				}
-				
-				// t.setAttribute("id", "table" + id);
-				// d.appendChild(t);
-				
-				// fillRecord(id, d);
-			}
-		},
-		error:function(data){console.log(data);return data;}
-	});
+function getExcelHead(head, d, id){
+	var tablestr = head.split("::")[0];
+	d.innerHTML = tablestr;
+	var table = d.getElementsByTagName("table")[0];
+	table.setAttribute("id", "table" + id);
+	var n = head.split("::")[2];
+	var row = table.insertRow();
+	for(var i = 0; i < n; i++){
+		var cell = row.insertCell(i);
+		var input = document.createElement("input");
+		input.setAttribute("type", "text");
+		input.setAttribute("class", "table-input" + id);
+		cell.appendChild(input);
+	}
 }
 
 function fillRecord(excelid, d){
@@ -224,7 +200,6 @@ function fillRecord(excelid, d){
 		error:function(data){console.log(data);return data;}
 	});
 }
-
 
 function subrecord(id){
 	alert(id);

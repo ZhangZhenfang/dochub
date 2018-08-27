@@ -42,6 +42,14 @@ public class ExcelServiceImpl implements ExcelService{
 	private UserService userService;
 
 	@Override
+	public boolean update(Excel e) {
+		Excel excel = excelDao.getById(e.getExcelid());
+		excel.setHead(e.getHead());
+		excelDao.update(excel);
+		return true;
+	}
+
+	@Override
 	public AbstractResponse getByUser(UserDto user) {
 		UserDto u = userService.getByAccount(user.getAccount());
 		User us = new User();
@@ -58,7 +66,7 @@ public class ExcelServiceImpl implements ExcelService{
 	}
 
 	@Override
-	public Map<String, String> uploadExcel(String tmpPath, String baseDir, Excel excel, UserDto user) throws Exception{
+	public Long uploadExcel(String tmpPath, String baseDir, Excel excel, UserDto user) throws Exception{
 		Map<String, String> res = new HashMap<>();
 		try {
 			UserDto u = userService.getByAccount(user.getAccount());
@@ -66,30 +74,34 @@ public class ExcelServiceImpl implements ExcelService{
 			us.setUserid(Long.parseLong(u.getUserid()));
 			excel.setUser(us);
 			excel.setPath("excelfiles/" + excel.getUser().getUserid() + "/" + excel.getFilename());
-			File file = new File(baseDir + "excelfiles/" + excel.getUser().getUserid());
-			if(!file.exists()) {
-				file.mkdirs();
-			}
-			FileInputStream is = new FileInputStream(new File(tmpPath));
-			FileOutputStream os = new FileOutputStream(new File(baseDir + excel.getPath()));
-			int len;
-			byte[] bytes = new byte[2048];
-			
-			while((len = is.read(bytes)) != -1) {
-				os.write(bytes, 0, len);
-			}
-			is.close();
-			os.close();
-			if(new File(baseDir + excel.getPath()).exists()) {
+//			File file = new File(baseDir + "excelfiles/" + excel.getUser().getUserid());
+//			if(!file.exists()) {
+//				file.mkdirs();
+//			}
+//			FileInputStream is = new FileInputStream(new File(tmpPath));
+//			FileOutputStream os = new FileOutputStream(new File(baseDir + excel.getPath()));
+//			int len;
+//			byte[] bytes = new byte[2048];
+//
+//			while((len = is.read(bytes)) != -1) {
+//				os.write(bytes, 0, len);
+//			}
+//			is.close();
+//			os.close();
+//			if(new File(baseDir + excel.getPath()).exists()) {
 				excelDao.save(excel);
+//				String table = ExcelFileTools.Excel2Table(
+						//baseDir + excel.getPath(), excel.getExcelid() + "");
+//				excel.setHead(table);
+				excelDao.update(excel);
 				res.put("status", 1 + "");
-				return res;
-			}
-			else {
-				res.put("status", 2 + "");
-				return res;
-			}
-		} catch (FileNotFoundException e){
+				return excel.getExcelid();
+//			}
+//			else {
+//				res.put("status", 2 + "");
+//				return res;
+//			}
+		} catch (Exception e){
 			e.printStackTrace();
 			throw e;
 		}
@@ -159,9 +171,7 @@ public class ExcelServiceImpl implements ExcelService{
 		Excel excel = excelDao.getById(excelId);
 		if(excel != null) {
 			DefaultResponse<String> res = new DefaultResponse<>();
-			String data = ExcelFileTools.Excel2Table(baseDir + excel.getPath(), excelId + "");
-			System.out.println(data);
-			System.out.println(data);
+			String data = excel.getHead();//= ExcelFileTools.Excel2Table(baseDir + excel.getPath(), excelId + "");
 			res.setStatus("1");
 			res.setData(data);
 			return res;
@@ -175,7 +185,7 @@ public class ExcelServiceImpl implements ExcelService{
 	}
 
 	@Override
-	public String downloadExcel(String baseDir, long excelid, UserDto user) throws Exception{
+	public ArrayList<String[]> downloadExcel(String baseDir, long excelid, UserDto user) throws Exception{
 		Excel excel = excelDao.getByUserIDAndId(Long.parseLong(user.getUserid()), excelid);
 		if(excel != null) {
 			try {
@@ -196,8 +206,12 @@ public class ExcelServiceImpl implements ExcelService{
 						data.add(arrString);
 					}
 					String tmpPath = path.substring(0, path.lastIndexOf("/")) + excel.getExcelid() + "tmp" + excel.getFilename();
-					ExcelFileTools.addExcel(new File(path), new File(tmpPath), data, data.size());
-					return tmpPath + "~" + excel.getFilename();
+					String[] strs = new String[3];
+					strs[0] = path;
+					strs[1] = tmpPath;
+					strs[2] = excel.getFilename();
+					data.add(strs);
+					return data;
 				}
 			}catch (Exception e) {
 				throw e;
@@ -209,7 +223,7 @@ public class ExcelServiceImpl implements ExcelService{
 	}
 
 	@Override
-	public AbstractResponse excelToTable(String baseDir, long excelId, UserDto user) throws IOException {
+	public ArrayList<String[]> excelToTable(String baseDir, long excelId, UserDto user) throws IOException {
 		Excel excel = excelDao.getByUserIDAndId(Long.parseLong(user.getUserid()), excelId);
 		if(excel != null) {
 			String path = baseDir + excel.getPath();
@@ -225,18 +239,25 @@ public class ExcelServiceImpl implements ExcelService{
 				data.add(arrString);
 			}
 			String tmpPath = path.substring(0, path.lastIndexOf("/")) + excel.getExcelid() + "tmp" + excel.getFilename();
-			ExcelFileTools.addExcel(new File(path), new File(tmpPath), data, data.size());
-			String str = ExcelFileTools.Excel2Table(tmpPath, excelId + "");
-			DefaultResponse<String> res = new DefaultResponse<>();
-			res.setData(str);
-			res.setStatus("1");
-			return res;
+			String[] strs = new String[2];
+			strs[0] = path;
+			strs[1] = tmpPath;
+			data.add(strs);
+			return data;
 		}
 		else {
-			ErrorResponse res = new ErrorResponse();
-			res.setStatus("003004");
-			res.setErrors("表格不存在");
-			return res;
+			return null;
+		}
+	}
+
+	@Override
+	public ExcelDto getById(UserDto user, Long excelid) {
+		Excel e = excelDao.getByUserIDAndId(Long.parseLong(user.getUserid()), excelid);
+		if(e == null){
+			return null;
+		}
+		else{
+			return e.toDto();
 		}
 	}
 }

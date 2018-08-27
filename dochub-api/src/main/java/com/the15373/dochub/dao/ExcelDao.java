@@ -23,6 +23,8 @@ public interface ExcelDao {
 
 	void delete(Excel excel);
 
+	void update(Excel excel);
+
 	Excel getByUserIDAndId(Long userid, long excelid);
 
 }

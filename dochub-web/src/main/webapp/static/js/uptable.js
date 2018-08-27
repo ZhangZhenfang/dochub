@@ -1,5 +1,3 @@
-// var url = "http://localhost:8080/dochub"
-// var url = "http://www.the15373.com/dochub"
 
 function createCollapseDiv(id, head, table, d){
 	console.log(table);
@@ -76,7 +74,7 @@ function createTable(excelid){
 		success:function(data){
 			console.log(data);
 			if(data.status == 0){
-				alert("清先登陆");
+				alert("请先登陆");
 				window.location.href = "login.html";
 			}
 			div.innerHTML = data.data.split("::")[0];
@@ -139,7 +137,7 @@ function buildTable(){
 		success:function(data){
 			console.log(data);
 			if(data.status == 0){
-				alert("清先登陆");
+				alert("请先登陆");
 				window.location.href = "login.html";
 			}
 			if(data.status == 1){

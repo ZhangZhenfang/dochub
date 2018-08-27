@@ -54,7 +54,7 @@ public class NoticeServiceImpl implements NoticeService {
 			Map<String, String> res = new HashMap<>();
 			res.put("status", "1");
 			noticeDao.save(notice);
-			notice.setPath("noticedata/" + notice.getUser().getUserid() + "/" + notice.getNoticeid());
+			notice.setPath("noticedata/" + notice.getUser().getUserid() + "/" + notice.getNoticeid() + "/");
 			noticeDao.update(notice);
 			return res;
 		}

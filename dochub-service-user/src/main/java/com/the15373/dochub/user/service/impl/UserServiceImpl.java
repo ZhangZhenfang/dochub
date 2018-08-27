@@ -59,6 +59,7 @@ public class UserServiceImpl implements UserService{
 			u.setSchool(user.getSchool());
 			u.setSex(user.getSex());
 			u.setStudentnumber(user.getStudentnumber());
+			u.setTime(new Date());
 			userDao.regist(u);
 			res.put("status", 1 + "");
 			return res;

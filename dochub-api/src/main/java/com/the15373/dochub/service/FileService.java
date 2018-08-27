@@ -10,7 +10,7 @@ import org.springframework.http.ResponseEntity;
 
 public interface FileService {
 
-	Map<String, String> uploadFile(String baseDir, String tmpPath, String fileName, long noticeid, UserDto user) throws FileNotFoundException, IOException;
+	Map<String, String> uploadFile(String baseDir, String fileName, long noticeid, UserDto user, String md5) throws FileNotFoundException, IOException;
 
 	String downloadFile(String baseDir, long fileid, UserDto user) throws Exception;
 

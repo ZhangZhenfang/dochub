@@ -96,6 +96,11 @@ public class ExcelDaoImpl implements ExcelDao {
 	}
 
 	@Override
+	public void update(Excel excel) {
+		sessionFactory.getCurrentSession().update(excel);
+	}
+
+	@Override
 	public Excel getByUserIDAndId(Long userid, long excelid) {
 		String hql = "from Excel e where e.user.userid =:userid and e.excelid =:excelid";
 		return sessionFactory.getCurrentSession().createQuery(hql, Excel.class)

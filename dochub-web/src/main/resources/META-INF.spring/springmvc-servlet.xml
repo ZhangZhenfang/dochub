@@ -19,10 +19,9 @@
 	<mvc:resources location="/static/css/" mapping="/css/**"></mvc:resources>
 	<mvc:resources location="/static/img/" mapping="/img/**"></mvc:resources>
 	<mvc:resources location="/static/test/" mapping="/test/**"></mvc:resources>
-	<mvc:resources location="/static/" mapping="/*.html"></mvc:resources>
-	
+	<mvc:resources location="/static/" mapping="/**"></mvc:resources>
+	<!--<mvc:resources location="/static/" mapping="/"></mvc:resources>-->
 	<mvc:resources location="/static/doc/" mapping="/doc/**"></mvc:resources>
-	
 
 	<!-- 避免IE执行AJAX时,返回JSON出现下载文件 -->
 	<bean id="mappingJacksonHttpMessageConverter"

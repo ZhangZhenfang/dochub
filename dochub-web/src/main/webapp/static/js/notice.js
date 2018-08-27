@@ -19,7 +19,7 @@ function createCollapseDiv(id, head, body, d){
     a2.appendChild(input2);
     
     var a3 = document.createElement("a");
-    a3.setAttribute("onClick", "downloadNotice(" + d.noticeid + ")");
+    a3.setAttribute("onClick", "downloadNotice(" + d.noticeid + ", " + d.user.userid + ", '" + d.notice + "')");
     var input3 = document.createElement("input");
     input3.setAttribute("class", "download");
     input3.setAttribute("type", "button");
@@ -50,9 +50,11 @@ function createCollapseDiv(id, head, body, d){
     return div4;
 }
 
-function downloadNotice(noticeid){
+function downloadNotice(noticeid, userid, notice){
+	console.log(noticeid, userid, notice)
 	var a = document.createElement('a');
-	a.href = url + "/notices/downloadNotice?noticeid=" + noticeid;
+	// a.href = url + "/notices/downloadNotice?noticeid=" + noticeid;
+    a.href = fileServer + "/downloadZip?path=noticedata/" + userid + "/" + noticeid + "&name=" + notice;
 	$("body").append(a); 
 	a.click();
 	$(a).remove();
@@ -234,7 +236,7 @@ function getMyNotice(){
 		xhrFields: {  withCredentials: true  }, 
 		success:function(data){
 			if(data.status == 0){
-				alert("清先登陆");
+				alert("请先登陆");
 				window.location.href = "login.html";
 			}
 			console.log(data);

@@ -1,6 +1,6 @@
 //var url = "http://www.the15373.com/"
- var url = "http://localhost:8080"
-
+var url = "http://localhost:8080";
+var fileServer = "http://localhost:8081";
 function getUserinfo(){
 	$.ajax({
 		url:url + "/users/getUserinfo",
